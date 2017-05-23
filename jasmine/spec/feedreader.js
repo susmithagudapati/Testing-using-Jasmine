@@ -72,7 +72,7 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-        it('should change the visibility when icon clicked', function() {
+        it('should change the visibility of menu when icon is clicked', function() {
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
 
@@ -97,7 +97,7 @@ $(function() {
             loadFeed(0, done);
         });
 
-        it('loadFeed is called and work is done', function(done) {
+        it('Feed container should contain atleast one entry', function(done) {
             expect($('.entry').length).not.toBe(0);
             done();
         });
@@ -133,7 +133,7 @@ $(function() {
             jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
         });
 
-        it('loadFeed is loaded correctly and changes content', function(done) {
+        it('content should be changed when new feed is loaded', function(done) {
             newUrl = $('.entry-link').attr('href');
             expect(newUrl).not.toBe(previousUrl);
             done();
