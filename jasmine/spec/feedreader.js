@@ -74,11 +74,11 @@ $(function() {
           */
         it('should change the visibility of menu when icon is clicked', function() {
 
-            // after clicking the menu icon, the menu should display
+            //after clicking the menu icon, the menu should display.
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
 
-            // after clicking the menu icon, the menu should hide now
+            //after clicking the menu icon, the menu should hide now.
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
@@ -118,13 +118,13 @@ $(function() {
 
         var previousFeed;
         var newFeed;
-        var originalTimeout;
 
         beforeEach(function(done) {
             /* To overcome the error - Async callback was not
                invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
                These lines increase the default timeout interval
             */
+
             loadFeed(0, function() {
                 previousFeed = $('.feed').html();
                 loadFeed(1, function() {
