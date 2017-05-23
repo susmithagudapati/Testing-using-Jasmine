@@ -73,9 +73,12 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
         it('should change the visibility of menu when icon is clicked', function() {
+
+            // after clicking the menu icon, the menu should display
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
 
+            // after clicking the menu icon, the menu should hide now
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
@@ -113,8 +116,8 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
 
-        var previousUrl;
-        var newUrl;
+        var previousFeed;
+        var newFeed;
         var originalTimeout;
 
         beforeEach(function(done) {
@@ -122,20 +125,16 @@ $(function() {
                invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
                These lines increase the default timeout interval
             */
-            originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = 7000;
-
-            previousUrl = $('.entry-link').attr('href');
-            loadFeed(1, done);
-        });
-
-        afterEach(function() {
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+            loadFeed(0, function() {
+                previousFeed = $('.feed').html();
+                loadFeed(1, function() {
+                    newFeed = $('.feed').html();
+                });
+            });
         });
 
         it('content should be changed when new feed is loaded', function(done) {
-            newUrl = $('.entry-link').attr('href');
-            expect(newUrl).not.toBe(previousUrl);
+            expect(newFeed).not.toEqual(previousFeed);
             done();
         });
     });
