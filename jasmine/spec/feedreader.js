@@ -118,17 +118,21 @@ $(function() {
 
         var previousFeed;
         var newFeed;
+        var originalTimeout;
 
         beforeEach(function(done) {
             /* To overcome the error - Async callback was not
                invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
                These lines increase the default timeout interval
             */
+            originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
             loadFeed(0, function() {
                 previousFeed = $('.feed').html();
                 loadFeed(1, function() {
                     newFeed = $('.feed').html();
+                    done();
                 });
             });
         });
@@ -136,6 +140,10 @@ $(function() {
         it('content should be changed when new feed is loaded', function(done) {
             expect(newFeed).not.toEqual(previousFeed);
             done();
+        });
+
+        afterEach(function() {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
         });
     });
 }());
