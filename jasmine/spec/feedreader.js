@@ -101,7 +101,7 @@ $(function() {
         });
 
         it('Feed container should contain atleast one entry', function(done) {
-            expect($('.entry').length).not.toBe(0);
+            expect($('.entry').length).toBeGreaterThan(0);
             done();
         });
     });
